@@ -3,6 +3,11 @@
   padding: 0px;
 }
 
+.textH2 {
+  display: inline-block;
+  min-width: 230px;
+}
+
 .item {
   display: flex;
   gap: 20px;

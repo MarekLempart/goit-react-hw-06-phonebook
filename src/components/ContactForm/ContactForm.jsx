@@ -1,16 +1,40 @@
 // ContactForm.jsx
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+// import PropTypes from 'prop-types';
+// import { useState } from 'react';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { getContacts } from 'redux/selectors';
 import css from './ContactForm.module.css';
 
-export const ContactForm = ({ addContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
-  // funkcja aktualizująca stan nazwy i numeru
-  const onChangeInput = evt => {
-    const { name, value } = evt.currentTarget;
-    name === 'name' ? setName(value) : setNumber(value);
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
+
+  // // funkcja aktualizująca stan nazwy i numeru
+  // const onChangeInput = evt => {
+  //   const { name, value } = evt.currentTarget;
+  //   name === 'name' ? setName(value) : setNumber(value);
+  // };
+  const handleSubmit = event => {
+    event.preventDefault();
+    const contact = {
+      id: nanoid(),
+      name: event.currentTarget.elements.name.value,
+      number: event.currentTarget.elements.number.value,
+    };
+    const isExist = contacts.find(
+      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+    );
+    if (isExist) {
+      return toast.warn(`${contact.name} is already in contacts`);
+    }
+
+    dispatch(addContact(contact));
+    event.currentTarget.reset();
   };
 
   return (
@@ -62,6 +86,6 @@ export const ContactForm = ({ addContact }) => {
   );
 };
 
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};
+// ContactForm.propTypes = {
+//   addContact: PropTypes.func.isRequired,
+// };
