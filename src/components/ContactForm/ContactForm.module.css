@@ -1,5 +1,6 @@
-/* ContactForm.moduole.css */
-.formstyle {
+/* ContactForm.module.css */
+
+.form {
   padding: 24px;
   background-color: #f0f8ff;
   border: 2px solid #2f4f4f;
@@ -8,13 +9,15 @@
 }
 
 .label {
+  display: block;
   margin-bottom: 10px;
 }
 
 .input {
+  display: block;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 7px;
   border-radius: 7px;
 }
 
@@ -28,7 +31,7 @@
   box-shadow: 0 5px 10px -1px #33333366;
 }
 
-.button {
+.submitButton {
   margin-top: 10px;
   background-color: #b0c4de66;
   border: 3px solid #2f4f4f;
@@ -36,7 +39,8 @@
   padding: 5px 20px;
 }
 
-.button:hover {
+.submitButton:hover,
+.submitButton:focus {
   background: #b0c4de;
   box-shadow: 0 5px 10px -1px #33333340;
 }

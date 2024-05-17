@@ -1,16 +1,20 @@
-// ResetButton.jsx
+// ReserButton.jsx
 
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { resetContacts } from '../../redux/contactsSlice';
 import css from './ResetButton.module.css';
 
-export const ResetButton = ({ onClick }) => {
+export const ResetButton = ({ onReset }) => {
+  const dispatch = useDispatch();
+
+  const handleReset = () => {
+    dispatch(resetContacts());
+    onReset();
+  };
+
   return (
-    <button onClick={onClick} className={css.resetButton}>
-      Reset Local Storage
+    <button className={css.resetButton} type="button" onClick={handleReset}>
+      Reset Contacts
     </button>
   );
-};
-
-ResetButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
